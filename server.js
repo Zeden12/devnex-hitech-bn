@@ -1,17 +1,26 @@
-const mongoose = require('mongoose');
-require('dotenv').config();
+const express = require('express');
+const dotenv = require('dotenv');
+const cors = require('cors');
+const connectDB = require('./config/db'); // Import from config folder
 
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      dbName: "DEVNEX", 
-    });
+dotenv.config();
 
-    console.log('MongoDB Connected Successfully!');
-  } catch (error) {
-    console.error('MongoDB Connection Error:', error.message);
-    process.exit(1);
-  }
-};
+const app = express();
+const PORT = process.env.PORT || 5000;
 
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Database Connection
 connectDB();
+
+// Routes
+app.get('/', (req, res) => {
+  res.send('Devnex Backend is Running!');
+});
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
