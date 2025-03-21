@@ -1,7 +1,13 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
-const connectDB = require('./config/db'); // Import from config folder
+const connectDB = require('./config/db');
+const swaggerSetup = require('./swagger'); // Import Swagger setup
+const path = require('path');
+
+// Import routes
+const contactRoutes = require('./routes/contactRoutes');
+const demoRoutes = require('./routes/demoRoutes');
 
 dotenv.config();
 
@@ -16,6 +22,13 @@ app.use(express.json());
 connectDB();
 
 // Routes
+app.use('/api/contact', contactRoutes);
+app.use('/api/demo', demoRoutes);
+
+// Swagger setup
+swaggerSetup(app);
+
+// Default route
 app.get('/', (req, res) => {
   res.send('Devnex Backend is Running!');
 });
