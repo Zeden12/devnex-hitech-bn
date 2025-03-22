@@ -3,7 +3,7 @@ services:
     name: devnex-hitech-bn
     env: node
     buildCommand: npm install
-    startCommand: node server.js
+    startCommand: node index.js
     envVars:
       - key: MONGO_URL
         sync: false 
