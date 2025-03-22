@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: devnex-hitech-bn
+    env: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: MONGO_URL
+        sync: false 
+      - key: PORT
+        value: 5000
+    healthCheckPath: /
