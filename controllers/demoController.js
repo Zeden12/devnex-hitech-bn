@@ -1,7 +1,6 @@
 const { body, validationResult } = require('express-validator');
 const Demo = require('../models/Demo');
 
-// Validation rules for the demo form
 exports.validateDemoForm = [
   body('firstName')
     .notEmpty().withMessage('First name is required')
@@ -29,12 +28,10 @@ exports.validateDemoForm = [
 
   body('message')
     .notEmpty().withMessage('Message is required')
-    .isLength({ min: 10 }).withMessage('Message must be at least 10 characters long'),
+    .isLength({ min: 10 }).withMessage('Message must be at least 5 characters long'),
 ];
 
-// Handle demo form submission
 exports.submitDemoForm = async (req, res) => {
-  // Check for validation errors
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });

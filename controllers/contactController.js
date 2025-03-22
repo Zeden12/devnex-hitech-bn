@@ -1,7 +1,6 @@
 const { body, validationResult } = require('express-validator');
 const Contact = require('../models/Contact');
 
-// Validation rules for the contact form
 exports.validateContactForm = [
   body('fullName')
     .notEmpty().withMessage('Full name is required')
@@ -19,10 +18,7 @@ exports.validateContactForm = [
     .notEmpty().withMessage('Message is required')
     .isLength({ min: 10 }).withMessage('Message must be at least 10 characters long'),
 ];
-
-// Handle contact form submission
 exports.submitContactForm = async (req, res) => {
-  // Check for validation errors
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });

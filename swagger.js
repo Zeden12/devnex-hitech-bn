@@ -21,12 +21,11 @@ const swaggerOptions = {
       },
     ],
   },
-  apis: ['./routes/*.js'], // Path to your route files
+  apis: ['./routes/*.js'],
 };
 
 const swaggerSpec = swaggerJsDoc(swaggerOptions);
 
-// Serve Swagger UI
 const swaggerSetup = (app) => {
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 };
